@@ -28,3 +28,6 @@ make html
 pre-commit install
 ```
 
+## GitHub Pages
+
+https://valegui.github.io/intro-cicd/
