@@ -2,7 +2,7 @@ Integracion Continua y Entrega Continua (CI/CD)
 ===============================================
 
 GitHub Actions
---------------
+==============
 Permite tratar la pipeline CI como codigo. Solo se necesita un archivo .yaml para la definicion del 
 workflow en un directorio llamado '.github/workflows'.
 
@@ -40,7 +40,7 @@ workflow se compone de:
 * Event
    Evento que dice cuando debe ejecutarse un workflow, por ejemplo push, pull_request, release, fork, 
    delete. 
-   Ver `GitHub Actions Events <https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows>`_
+   Ver `GitHub Actions Events <https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows>`_.
 * Jobs
    Es un conjunto de pasos en un workflow que se ejecutan en un mismo 'Runner'. En un workflow hay 1 
    o mas 'Jobs'. Cada 'Job' puede contener 1 o mas 'Steps'. Por defecto los 'Jobs' se ejecutan en 
@@ -59,16 +59,48 @@ workflow se compone de:
 
 
 Configurar
-----------
+^^^^^^^^^^
 
 Runner propio
-^^^^^^^^^^^^^
+-------------
+
 Un self-hosted runner se puede agregar a un repositorio, una organizacion o una empresa. Como 
 ejemplo, para agregar un runner a un repositorio se va a Settings/Actions/Runners.
 Alli estaran las instrucciones para instalar la aplicacion de GitHub Actions para configurar un 
 servidor como Runner. Tambien se indica como agregarlo al workflow. Todos los Runners propios tienen
 labels que permiten seleccionarlo en el .yaml.
 
-.. code-block::rst
+.. code-block::
 
    runs-on: [self-hosted, linux, ARM64]
+
+
+Costos
+------
+
+.. list-table::
+   :header-rows: 1
+
+   * - Product
+     - Storage
+     - Minutes (per month)
+   * - GitHub Free
+     - 500 MB
+     - 2,000
+   * - GitHub Pro
+     - 1 GB
+     - 3,000
+   * - GitHub Free for organizations
+     - 500 MB
+     - 2,000
+   * - GitHub Team
+     - 2 GB
+     - 3,000
+   * - GitHub Enterprise Cloud
+     - 50 GB
+     - 50,000
+
+Para mas detalles de costos y tiempos, ver 
+`About billing for GitHub Actions <https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions>`_.
+
+
