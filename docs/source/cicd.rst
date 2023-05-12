@@ -61,6 +61,10 @@ workflow se compone de:
 Configurar
 ^^^^^^^^^^
 
+GitHub Pages
+------------
+
+
 Runner propio
 -------------
 
@@ -76,7 +80,7 @@ labels que permiten seleccionarlo en el .yaml.
 
 
 Costos
-------
+^^^^^^
 
 .. list-table::
    :header-rows: 1

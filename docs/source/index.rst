@@ -6,12 +6,8 @@
 Rapida introduccion a CI/CD
 ===========================
 
-Este repositorio contiene un ejemplo de codigo Python y documentacion Sphinx..
-La configuracion de python contiene:
-- pre-commit
-- isort + black + flake8
-El repositorio de la pagina contiene:
-- GitHub Actions
+Esta pagina fue generada para hacer una introduccion rapida a integracion continua y entrega 
+continua.
 
 .. toctree::
    :maxdepth: 2
@@ -24,6 +20,7 @@ Contenidos
    :maxdepth: 2
 
    cicd
+   docs
    usage
    api
 
