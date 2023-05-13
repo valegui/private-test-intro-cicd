@@ -56,10 +56,33 @@ workflow se compone de:
    Es el nivel mas bajo en un workflow. Ejecutan una sola tarea.
 
 
-
-
 Configurar
 ^^^^^^^^^^
+
+.. code-block:: yaml
+
+   name: Example workflow
+
+   on: # Para indicar el evento
+     push:
+       branches: ['master']
+
+   jobs:
+     build: # Nombre del Job
+       runs-on: ubuntu-latest # Indica runner
+       steps: # Especifica pasos que se ejecutan en orden
+         - name: checkout
+           uses: actions/checkout@v3
+         - name: Install dependencies
+           run: |
+             python -m pip install --upgrade pip
+             pip install -r requirements.txt
+         - name: Python Black Check
+           uses: rodrigogiraoserrao/python-black-check@v2.0
+           with:
+             line-length: '88'
+             exclude: '/(\.git|\.hg|\.mypy_cache|\.pytest_cache|\.tox|\.venv|_build|build|dist)/'
+
 
 GitHub Pages
 ------------
@@ -267,7 +290,47 @@ Usan EventListener, TriggerBinding y TriggerTemplate.
 .. code-block:: yaml
 
    apiVersion: triggers.tekton.dev/
-   kind: 
+   kind: TriggerBinding
+   metadata:
+     name: cd-binding # Igual al nombre en EventListener
+   spec:
+     params:
+       - name: repository
+         value: "$(body.repository.url)"
+       - name: branch
+         value: "$(body.ref)"
+
+
+.. code-block:: yaml
+
+   apiVersion: triggers.tekton.dev/
+   kind: TriggerTemplate
+   metadata:
+     name: cd-template # Igual al nombre en EventListener
+   spec:
+     params:
+       - name: repository
+         description: GIT repo URL
+         default: ""
+       - name: branch
+         description: Branch to process
+         default: "master"
+     resoursetemplates: # Contiene un recurso PipelineRun
+     - apiVersion: tekton.dev/v1beta1
+       kind: PipelineRun
+       metadata: 
+         generateName: cd-pipeline-run # con generateName se especifica un id unico
+       spec:
+         serviceAccountName: pipeline # service account que corre la pipeline
+         pipelineRef: # referencia a la pipeline que se quiere correr
+           name: cd-pipeline # asumiendo que hay una pipeline llamada asi
+         params: # parametros que cd-pipeline indico recibir en params
+           - name: repo-url # nombre que la cd-pipeline especifica
+             value: $(tt.params.repository) # este viene de la seccion params de TriggerTemplate
+           - name: branch
+             value: $(tt.params.branch)
+
+
 
 Tekton en AWS
 ^^^^^^^^^^^^^
