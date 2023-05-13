@@ -87,6 +87,8 @@ Configurar
 GitHub Pages
 ------------
 
+.. image:: _static/gh-pages.png
+
 
 Runner propio
 -------------
