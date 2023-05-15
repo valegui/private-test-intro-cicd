@@ -27,6 +27,15 @@ autoapi_type = "python"
 autoapi_dirs = ["../../drinks"]
 autoapi_file_patterns = ["*.py"]
 autoapi_add_toctree_entry = False
+autoapi_options = [
+    "members",
+    "private-members",
+    "show-inheritance",
+    "show-module-summary",
+    "special-members",
+    "imported-members",
+    "show-inheritance-diagram",
+]
 
 templates_path = ["_templates"]
 exclude_patterns = []
