@@ -1,5 +1,7 @@
 # Rapida Introduccion a CI/CD
 
+[![codecov](https://codecov.io/gh/valegui/intro-cicd/branch/main/graph/badge.svg?token=5I2LL0ZHW7)](https://codecov.io/gh/valegui/intro-cicd)
+
 Este repositorio es un ejemplo para mostrar como configurar un flujo CI/CD (sencillo) para un codigo Python y contiene ejemplo de documentacion con Sphinx.
 
 ## CI/CD
