@@ -1,6 +1,14 @@
 Integracion Continua y Entrega Continua (CI/CD)
 ===============================================
 
+* CI es integrar contantemente el cambio en el codigo, usando scripts para builds y pruebas sobre 
+los cambios.
+* CD es la practica de crear y desplegar codigo, generalmente en un ambiente de prueba, asi se puede
+pasar a produccion en cualquier momento.
+
+Se puede hacer despliegue cada vez que se integra, o se puede tener CI haciendo tests en otras ramas
+y pull_requests, y al hacer el merge a master comienza CD.
+
 GitHub Actions
 ==============
 Permite tratar pipeline CI como codigo. Solo se necesita un archivo .yaml para la definicion del 
@@ -83,11 +91,81 @@ Configurar
              line-length: '88'
              exclude: '/(\.git|\.hg|\.mypy_cache|\.pytest_cache|\.tox|\.venv|_build|build|dist)/'
 
+Referencia entre workflows
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: yaml
+
+  name: Dependent workflow
+
+  on:
+    workflow_run:
+      workflows: ['Example workflow']
+      branches: ['master']
+      types:
+        - completed
+
+Si se especifican multiples workflows, solo uno necesita lograr el estado indicado en `types`. Si se 
+necesita que el workflow que llego al estado indicado, lo haya hecho con exito, es necesario 
+controlar el estado en el job.
+
+.. code-block:: yaml
+
+  jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - run: echo 'The triggering workflow passed'
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'The triggering workflow failed'
+
 
 GitHub Pages
 ------------
 
 .. image:: _static/gh-pages.png
+
+.. code-block:: yaml
+
+  name: GitHub Pages
+
+  on:
+    push:
+      branches: [ "main"]
+
+  permissions:
+      contents: write
+
+  jobs:
+    deploy:
+      runs-on: ubuntu-latest
+      permissions:
+        contents: write
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+        - name: Setup Graphviz
+          uses: ts-graphviz/setup-graphviz@v1
+          with:
+            ubuntu-skip-apt-update: true
+        - name: Sphinx build
+          run: |
+            sphinx-build -b html docs/source/ docs/build/html
+        - name: Deploy
+          uses: peaceiris/actions-gh-pages@v3
+          if: ${{ github.ref == 'refs/heads/main' }}
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: docs/build/html
+            force_orphan: true
 
 
 Runner propio
@@ -131,6 +209,63 @@ Costos
 
 Para mas detalles de costos y tiempos, ver 
 `About billing for GitHub Actions <https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions>`_.
+
+Diferencia con GitLab CI/CI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+GitLab CI se define en un archivo .gitlab-ci.yaml
+En gitlab se define un pipeline. Un pipeline se compone de Jobs independientes que ejecutan 
+scripts. Cada Job se es parte de un Stage. La ejecucion de stages es secuencial, y la ejecucion de 
+jobs en un stage es en paralelo.
+
+.. graphviz::
+
+    digraph conceptosgitlab {
+
+       "Pipeline" [shape=box]
+       "Stage" [shape=box]
+       "Jobs" [shape=ellipse]
+       "Script" [shape=box]
+
+       { rank=same "Pipeline" "Stage" "Jobs" "Script"}
+
+       "Pipeline" -> "Stage" -> "Jobs" -> "Script";
+   }
+
+El orden de lo items en `stages` define el orden de ejecucion.
+
+.. code-block:: yaml
+
+  stages:          # List of stages for jobs, and their order of execution
+    - build
+    - test
+    - deploy
+
+  build-job:       # This job runs in the build stage, which runs first.
+    stage: build
+    script:
+      - echo "Compiling the code..."
+      - echo "Compile complete."
+
+  unit-test-job:   # This job runs in the test stage.
+    stage: test    # It only starts when the job in the build stage completes successfully.
+    script:
+      - echo "Running unit tests... This will take about 60 seconds."
+      - sleep 60
+      - echo "Code coverage is 90%"
+
+  lint-test-job:   # This job also runs in the test stage.
+    stage: test    # It can run at the same time as unit-test-job (in parallel).
+    script:
+      - echo "Linting code... This will take about 10 seconds."
+      - sleep 10
+      - echo "No lint issues found."
+
+  deploy-job:      # This job runs in the deploy stage.
+    stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+    environment: production
+    script:
+      - echo "Deploying application..."
+      - echo "Application successfully deployed."
 
 
 Tekton
