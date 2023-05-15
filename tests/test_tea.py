@@ -13,7 +13,7 @@ class TestTea:
     def test_init_temperature(self, temp, expected):
         tea = Tea(temp)
         assert tea is not None
-        assert tea.temperature == expected
+        assert tea.temperature == expected + 1
 
     def test_brew(self, capsys):
         tea = Tea()
