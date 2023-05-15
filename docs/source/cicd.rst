@@ -2,9 +2,11 @@ Integracion Continua y Entrega Continua (CI/CD)
 ===============================================
 
 * CI es integrar contantemente el cambio en el codigo, usando scripts para builds y pruebas sobre 
-los cambios.
-* CD es la practica de crear y desplegar codigo, generalmente en un ambiente de prueba, asi se puede
-pasar a produccion en cualquier momento.
+  los cambios.
+
+* CD es la practica de crear y desplegar codigo, generalmente en un ambiente de prueba, asi se 
+  puede pasar a produccion en cualquier momento.
+
 
 Se puede hacer despliegue cada vez que se integra, o se puede tener CI haciendo tests en otras ramas
 y pull_requests, y al hacer el merge a master comienza CD.
