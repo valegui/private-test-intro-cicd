@@ -1,0 +1,965 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="es" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Integracion Continua y Entrega Continua (CI/CD) &#8212; documentación de Introduccion a CI/CD - </title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/translations.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cicd';</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Documentacion en Python y Sphinx" href="docs.html" />
+    <link rel="prev" title="Rapida introduccion a CI/CD" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item"><img src="_static/logo_DO_solo.png" alt="DO" style='height: 100%; width: 100%; object-fit: contain'></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+  </div>
+  
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><a href="index.html">
+    <img src="_static/CICDBlog.png" alt="CICD"
+        style='height: 100%; width: 100%; object-fit: contain'>
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Integracion Continua y Entrega Continua (CI/CD)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Documentacion en Python y Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Descarga y Setup</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/drinks/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">drinks</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/cicd.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Integracion Continua y Entrega Continua (CI/CD)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Integracion Continua y Entrega Continua (CI/CD)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#github-actions">GitHub Actions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos">Conceptos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configurar">Configurar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencia-entre-workflows">Referencia entre workflows</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github-pages">GitHub Pages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runner-propio">Runner propio</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#costos">Costos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferencia-con-gitlab-ci-ci">Diferencia con GitLab CI/CI</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tekton">Tekton</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Conceptos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-en-concreto">Conceptos en concreto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Configurar</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-tasks-y-steps">Definir Tasks y Steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-pipeline">Definir Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejecutar-pipeline">Ejecutar Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-triggers">Definir Triggers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tekton-en-aws">Tekton en AWS</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="integracion-continua-y-entrega-continua-ci-cd">
+<h1>Integracion Continua y Entrega Continua (CI/CD)<a class="headerlink" href="#integracion-continua-y-entrega-continua-ci-cd" title="Enlace permanente a este encabezado">#</a></h1>
+<ul class="simple">
+<li><p>CI es integrar contantemente el cambio en el codigo, usando scripts para builds y pruebas sobre
+los cambios.</p></li>
+<li><p>CD es la practica de crear y desplegar codigo, generalmente en un ambiente de prueba, asi se
+puede pasar a produccion en cualquier momento.</p></li>
+</ul>
+<p>Se puede hacer despliegue cada vez que se integra, o se puede tener CI haciendo tests en otras ramas
+y pull_requests, y al hacer el merge a master comienza CD.</p>
+</section>
+<section id="github-actions">
+<h1>GitHub Actions<a class="headerlink" href="#github-actions" title="Enlace permanente a este encabezado">#</a></h1>
+<p>Permite tratar pipeline CI como codigo. Solo se necesita un archivo .yaml para la definicion del
+workflow en un directorio llamado “.github/workflows”.</p>
+<p>No importa el nombre que se le de a los archivos porque cada archivo describe cuando se debe
+ejecutar. El «cuando» es el evento que debe ocurrir para ejecutar el job.</p>
+<p>Una gran ventaja de GitHub Actions sobre otras herramientas CI como Circle CI, Travis CI y Jenkins,
+es que basta con crear el directorio de workflows y agregar los .yaml, no es necesario configurar el
+workflow en una pagina externa.</p>
+<section id="conceptos">
+<h2>Conceptos<a class="headerlink" href="#conceptos" title="Enlace permanente a este encabezado">#</a></h2>
+<p>Un Workflow es una series de procesos automaticos que se ejecutan por GitHub Actions. En un
+repositorio pueden haber multiples workflows (ej: 1 para CI, 1 para CD, 1 para Seguridad). Cada
+workflow se compone de:</p>
+<div class="graphviz"><img src="_images/graphviz-351b4916daf38d1b5edb6968e66deee08fd93251.png" alt="digraph conceptos {
+
+    &quot;Event&quot; [shape=box]
+    &quot;Jobs&quot; [shape=box]
+    &quot;Runner&quot; [shape=ellipse]
+    &quot;Steps&quot; [shape=box]
+    &quot;Actions&quot; [shape=box]
+
+    { rank=same &quot;Event&quot; &quot;Jobs&quot; &quot;Runner&quot; &quot;Steps&quot; &quot;Actions&quot;}
+
+    &quot;Event&quot; -&gt; &quot;Jobs&quot; -&gt; &quot;Runner&quot; -&gt; &quot;Steps&quot; -&gt; &quot;Actions&quot;;
+}" class="graphviz" /></div>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Event</dt><dd><p>Evento que dice cuando debe ejecutarse un workflow, por ejemplo push, pull_request, release, fork,
+delete.
+Ver <a class="reference external" href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows">GitHub Actions Events</a>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Jobs</dt><dd><p>Es un conjunto de pasos en un workflow que se ejecutan en un mismo “Runner”. En un workflow hay 1
+o mas “Jobs”. Cada “Job” puede contener 1 o mas “Steps”. Por defecto los “Jobs” se ejecutan en
+paralelo, menos cuando se especifica dependencia (con la keyword “needs”).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Runner</dt><dd><p>Servidor donde se ejecutan los “Jobs”.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Steps</dt><dd><p>Es un conjunto de shell commands o acciones. Aquellos que son parte de un mismo “Job” se ejecutan
+en el mimsmo “Runner”, por lo que pueden compartir informacion entre ellos. Los pasos se ejecutan
+en orden y se puede tener un paso para compilar, otro para aplicar formato, otro para los tests,
+otro que crea un contenedor de Docker.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Actions</dt><dd><p>Es el nivel mas bajo en un workflow. Ejecutan una sola tarea.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="configurar">
+<h2>Configurar<a class="headerlink" href="#configurar" title="Enlace permanente a este encabezado">#</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Example workflow</span>
+
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="c1"># Para indicar el evento</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;master&#39;</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="c1"># Nombre del Job</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span><span class="w"> </span><span class="c1"># Indica runner</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="c1"># Especifica pasos que se ejecutan en orden</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">checkout</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">python -m pip install --upgrade pip</span>
+<span class="w">          </span><span class="no">pip install -r requirements.txt</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Python Black Check</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rodrigogiraoserrao/python-black-check@v2.0</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">line-length</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;88&#39;</span>
+<span class="w">          </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/(\.git|\.hg|\.mypy_cache|\.pytest_cache|\.tox|\.venv|_build|build|dist)/&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="referencia-entre-workflows">
+<h2>Referencia entre workflows<a class="headerlink" href="#referencia-entre-workflows" title="Enlace permanente a este encabezado">#</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dependent workflow</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_run</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">workflows</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Example</span><span class="nv"> </span><span class="s">workflow&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;master&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">types</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">completed</span>
+</pre></div>
+</div>
+<p>Si se especifican multiples workflows, solo uno necesita lograr el estado indicado en <cite>types</cite>. Si se
+necesita que el workflow que llego al estado indicado, lo haya hecho con exito, es necesario
+controlar el estado en el job.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">jobs</span><span class="p">:</span>
+<span class="nt">on-success</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">  </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.event.workflow_run.conclusion == &#39;success&#39; }}</span>
+<span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &#39;The triggering workflow passed&#39;</span>
+<span class="nt">on-failure</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">  </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.event.workflow_run.conclusion == &#39;failure&#39; }}</span>
+<span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &#39;The triggering workflow failed&#39;</span>
+</pre></div>
+</div>
+<section id="github-pages">
+<h3>GitHub Pages<a class="headerlink" href="#github-pages" title="Enlace permanente a este encabezado">#</a></h3>
+<img alt="_images/gh-pages.png" src="_images/gh-pages.png" />
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GitHub Pages</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;main&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="nt">permissions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">permissions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">python -m pip install --upgrade pip</span>
+<span class="w">          </span><span class="no">pip install -r requirements.txt</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Setup Graphviz</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ts-graphviz/setup-graphviz@v1</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">ubuntu-skip-apt-update</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sphinx build</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">sphinx-build -b html docs/source/ docs/build/html</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">peaceiris/actions-gh-pages@v3</span>
+<span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.ref == &#39;refs/heads/main&#39; }}</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">github_token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span>
+<span class="w">          </span><span class="nt">publish_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/build/html</span>
+<span class="w">          </span><span class="nt">force_orphan</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</section>
+<section id="runner-propio">
+<h3>Runner propio<a class="headerlink" href="#runner-propio" title="Enlace permanente a este encabezado">#</a></h3>
+<p>Un self-hosted runner se puede agregar a un repositorio, una organizacion o una empresa. Como
+ejemplo, para agregar un runner a un repositorio se va a Settings/Actions/Runners.
+Alli estaran las instrucciones para instalar la aplicacion de GitHub Actions para configurar un
+servidor como Runner. Tambien se indica como agregarlo al workflow. Todos los Runners propios tienen
+labels que permiten seleccionarlo en el .yaml.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">self-hosted</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">linux</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">ARM64</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="costos">
+<h2>Costos<a class="headerlink" href="#costos" title="Enlace permanente a este encabezado">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Product</p></th>
+<th class="head"><p>Storage</p></th>
+<th class="head"><p>Minutes (per month)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GitHub Free</p></td>
+<td><p>500 MB</p></td>
+<td><p>2,000</p></td>
+</tr>
+<tr class="row-odd"><td><p>GitHub Pro</p></td>
+<td><p>1 GB</p></td>
+<td><p>3,000</p></td>
+</tr>
+<tr class="row-even"><td><p>GitHub Free for organizations</p></td>
+<td><p>500 MB</p></td>
+<td><p>2,000</p></td>
+</tr>
+<tr class="row-odd"><td><p>GitHub Team</p></td>
+<td><p>2 GB</p></td>
+<td><p>3,000</p></td>
+</tr>
+<tr class="row-even"><td><p>GitHub Enterprise Cloud</p></td>
+<td><p>50 GB</p></td>
+<td><p>50,000</p></td>
+</tr>
+</tbody>
+</table>
+<p>Para mas detalles de costos y tiempos, ver
+<a class="reference external" href="https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions">About billing for GitHub Actions</a>.</p>
+</section>
+<section id="diferencia-con-gitlab-ci-ci">
+<h2>Diferencia con GitLab CI/CI<a class="headerlink" href="#diferencia-con-gitlab-ci-ci" title="Enlace permanente a este encabezado">#</a></h2>
+<p>GitLab CI se define en un archivo .gitlab-ci.yaml
+En gitlab se define un pipeline. Un pipeline se compone de Jobs independientes que ejecutan
+scripts. Cada Job se es parte de un Stage. La ejecucion de stages es secuencial, y la ejecucion de
+jobs en un stage es en paralelo.</p>
+<div class="graphviz"><img src="_images/graphviz-f6805b394df4d5e0e0c1b048ce4a9e328609d25c.png" alt="digraph conceptosgitlab {
+
+    &quot;Pipeline&quot; [shape=box]
+    &quot;Stage&quot; [shape=box]
+    &quot;Jobs&quot; [shape=ellipse]
+    &quot;Script&quot; [shape=box]
+
+    { rank=same &quot;Pipeline&quot; &quot;Stage&quot; &quot;Jobs&quot; &quot;Script&quot;}
+
+    &quot;Pipeline&quot; -&gt; &quot;Stage&quot; -&gt; &quot;Jobs&quot; -&gt; &quot;Script&quot;;
+}" class="graphviz" /></div>
+<p>El orden de lo items en <cite>stages</cite> define el orden de ejecucion.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">stages</span><span class="p">:</span><span class="w">          </span><span class="c1"># List of stages for jobs, and their order of execution</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy</span>
+
+<span class="nt">build-job</span><span class="p">:</span><span class="w">       </span><span class="c1"># This job runs in the build stage, which runs first.</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Compiling the code...&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Compile complete.&quot;</span>
+
+<span class="nt">unit-test-job</span><span class="p">:</span><span class="w">   </span><span class="c1"># This job runs in the test stage.</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="w">    </span><span class="c1"># It only starts when the job in the build stage completes successfully.</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Running unit tests... This will take about 60 seconds.&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sleep 60</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Code coverage is 90%&quot;</span>
+
+<span class="nt">lint-test-job</span><span class="p">:</span><span class="w">   </span><span class="c1"># This job also runs in the test stage.</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="w">    </span><span class="c1"># It can run at the same time as unit-test-job (in parallel).</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Linting code... This will take about 10 seconds.&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sleep 10</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;No lint issues found.&quot;</span>
+
+<span class="nt">deploy-job</span><span class="p">:</span><span class="w">      </span><span class="c1"># This job runs in the deploy stage.</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy</span><span class="w">  </span><span class="c1"># It only runs when *both* jobs in the test stage complete successfully.</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Deploying application...&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Application successfully deployed.&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tekton">
+<h1>Tekton<a class="headerlink" href="#tekton" title="Enlace permanente a este encabezado">#</a></h1>
+<p>Tekton es un framework open source para crear pipelines CI/CD. Se tiene control total de la secuencia
+de ejecucion, y se pueden ejecutar trabajos en serie o en parelelo. Funciona en cualquier lugar donde
+se pueda ejecutar un cluster de Kubernetes.</p>
+<p>Puede crear rápidamente sistemas de CI/CD que sean escalables, serverless y cloud native. Tekton se
+ejecuta de forma nativa en un cluster de Kubernetes, lo que elimina la necesidad de una solución de
+CI/CD independiente.</p>
+<section id="id1">
+<h2>Conceptos<a class="headerlink" href="#id1" title="Enlace permanente a este encabezado">#</a></h2>
+<div class="graphviz"><img src="_images/graphviz-eb793bbba5def93a964b220cde15a1a6739cd184.png" alt="digraph conceptostekton {
+
+    &quot;Event&quot; [shape=box]
+    &quot;Trigger&quot; [shape=box]
+    &quot;Pipeline&quot; [shape=box]
+    &quot;Task&quot; [shape=box]
+    &quot;Steps&quot; [shape=box]
+
+    { rank=same &quot;Event&quot; &quot;Trigger&quot; &quot;Pipeline&quot; &quot;Task&quot; &quot;Steps&quot;}
+
+    &quot;Event&quot; -&gt; &quot;Trigger&quot; -&gt; &quot;Pipeline&quot; -&gt; &quot;Task&quot; -&gt; &quot;Steps&quot;;
+}" class="graphviz" /></div>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Event</dt><dd><p>Evento externo que dice cuando debe “dispararse un trigger”, por ejemplo push, pull_request.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Trigger</dt><dd><p>El estimulo que comienza un “pipeline run”.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Pipeline</dt><dd><p>Es un conjunto de tareas a ejecutar. No hay cantidad limite de tareas que se puede tener en un
+pipeline y pueden ejecutarse en paralelo o en serie. Por defecto se ejecutan en paralelo, para la
+ejecucion en serie se deben indicar dependencias.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Task</dt><dd><p>Es la unidad que comprende uno o mas pasos. En una “Task” se pueden definir parametros que seran
+entregados a los trabajos, tambien se pueden especificar el workspace necesario para almacenar
+artefactos.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Steps</dt><dd><p>Son los comandos ejecutados para llevar a cabo las “Tasks”. Generalmente son shell scripts que
+ejecutan comandos para build, test y deploy de aplicaciones. Se ejecutan en la secuencia indicada.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="conceptos-en-concreto">
+<h2>Conceptos en concreto<a class="headerlink" href="#conceptos-en-concreto" title="Enlace permanente a este encabezado">#</a></h2>
+<img alt="_images/tektonflow.png" src="_images/tektonflow.png" />
+<p>Tekton funciona con Kubernetes CRD, en orden de ejecucion los CRD son los siguentes:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>EventListener:</dt><dd><p>Un CRD que escucha por eventos de un repositorio.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>TriggerBinding</dt><dd><p>Captura datos del evento y se lo asigna o vincula a las propiedades en el pipeline.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>TriggerTemplate</dt><dd><p>Toma los parametros de de TriggerBinding y los asocia con PipelineRun.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>PipelineRun</dt><dd><p>Cuando se gatilla por un evento, TiggerTemplate crea un PipelineRun, pasando los parametros del
+evento necesarios para la ejecucion. Un PipelineRun se puede crear manualmente, sin usar eventos.
+PipelineRun es lo que crea una pipeline.  Es responsable de las tareas, para eso crea un TaskRun
+para cada tarea.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>TaskRun</dt><dd><p>Crea un pod Kubernetes para que en el se ejecute la tarea. Todos los pasos de una tarea se
+ejecutan en el mismo pod. Se crea un contenedor para cada paso.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>PersistentVolumeClaim</dt><dd><p>Almacenamiento para artefactos que pueden ser compartidos en la pipeline. Por esto se puede hacer
+check-out en una tarea, correr unit tesk en otra, linting en otra, crear una imagen en otra, etc.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Todo en Tekton es nativo de Kubernetes. Todo se ejecuta en un cluster de Kubernetes sin
+necesidad de servidores CI/CD externos.</p>
+</div>
+</section>
+<section id="id2">
+<h2>Configurar<a class="headerlink" href="#id2" title="Enlace permanente a este encabezado">#</a></h2>
+<section id="definir-tasks-y-steps">
+<h3>Definir Tasks y Steps<a class="headerlink" href="#definir-tasks-y-steps" title="Enlace permanente a este encabezado">#</a></h3>
+<p>Un archivo de especificacion de una tarea se define de la siguiente manera:</p>
+<p>Para cada step se debe especificar una imagen sobre la cual se ejecutara.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tekton.dev/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Task</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">checkout</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">repo-url</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Repo URL</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">checkout</span>
+<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bitname/git:latest</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">git</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;clone&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;$(params.repo-url)&quot;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>Un ejemplo de checkout task.</p>
+</section>
+<section id="definir-pipeline">
+<h3>Definir Pipeline<a class="headerlink" href="#definir-pipeline" title="Enlace permanente a este encabezado">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tekton.dev/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pipeline</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pipeline</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">repo-url</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clone</span>
+<span class="w">      </span><span class="nt">taskRef</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">checkout</span>
+<span class="w">      </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">repo-url</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$(params.repo-url)&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="ejecutar-pipeline">
+<h3>Ejecutar Pipeline<a class="headerlink" href="#ejecutar-pipeline" title="Enlace permanente a este encabezado">#</a></h3>
+<p>El segundo valor <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> es el nombre de pipeline especificado en el archivo.
+El parametro <code class="docutils literal notranslate"><span class="pre">-p</span></code> es para pasar los parametros que se especifican en el archivo de pipeline.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>tasks.yaml
+<span class="gp">$ </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>pipeline.yaml
+<span class="gp">$ </span>tkn<span class="w"> </span>pipeline<span class="w"> </span>start<span class="w"> </span>pipeline<span class="w"> </span>--showlog<span class="w"> </span>-p<span class="w"> </span>repo-url<span class="o">=</span><span class="s2">&quot;https://github.com/...&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="definir-triggers">
+<h3>Definir Triggers<a class="headerlink" href="#definir-triggers" title="Enlace permanente a este encabezado">#</a></h3>
+<p>Usan EventListener, TriggerBinding y TriggerTemplate.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">triggers.tekton.dev/</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EventListener</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd-listener</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">serviceAccountName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pipeline</span>
+<span class="w">  </span><span class="nt">triggers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">binding</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd-binding</span>
+<span class="w">      </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd-template</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">triggers.tekton.dev/</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TriggerBinding</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd-binding</span><span class="w"> </span><span class="c1"># Igual al nombre en EventListener</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">repository</span>
+<span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$(body.repository.url)&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">branch</span>
+<span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$(body.ref)&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">triggers.tekton.dev/</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TriggerTemplate</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd-template</span><span class="w"> </span><span class="c1"># Igual al nombre en EventListener</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">repository</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GIT repo URL</span>
+<span class="w">      </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">branch</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Branch to process</span>
+<span class="w">      </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;master&quot;</span>
+<span class="w">  </span><span class="nt">resoursetemplates</span><span class="p">:</span><span class="w"> </span><span class="c1"># Contiene un recurso PipelineRun</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tekton.dev/v1beta1</span>
+<span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PipelineRun</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">generateName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd-pipeline-run</span><span class="w"> </span><span class="c1"># con generateName se especifica un id unico</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">serviceAccountName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pipeline</span><span class="w"> </span><span class="c1"># service account que corre la pipeline</span>
+<span class="w">      </span><span class="nt">pipelineRef</span><span class="p">:</span><span class="w"> </span><span class="c1"># referencia a la pipeline que se quiere correr</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd-pipeline</span><span class="w"> </span><span class="c1"># asumiendo que hay una pipeline llamada asi</span>
+<span class="w">      </span><span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="c1"># parametros que cd-pipeline indico recibir en params</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">repo-url</span><span class="w"> </span><span class="c1"># nombre que la cd-pipeline especifica</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(tt.params.repository)</span><span class="w"> </span><span class="c1"># este viene de la seccion params de TriggerTemplate</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">branch</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(tt.params.branch)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tekton-en-aws">
+<h2>Tekton en AWS<a class="headerlink" href="#tekton-en-aws" title="Enlace permanente a este encabezado">#</a></h2>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Rapida introduccion a CI/CD</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="docs.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Documentacion en Python y Sphinx</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Integracion Continua y Entrega Continua (CI/CD)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#github-actions">GitHub Actions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos">Conceptos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configurar">Configurar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencia-entre-workflows">Referencia entre workflows</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github-pages">GitHub Pages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runner-propio">Runner propio</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#costos">Costos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferencia-con-gitlab-ci-ci">Diferencia con GitLab CI/CI</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tekton">Tekton</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Conceptos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-en-concreto">Conceptos en concreto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Configurar</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-tasks-y-steps">Definir Tasks y Steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-pipeline">Definir Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejecutar-pipeline">Ejecutar Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-triggers">Definir Triggers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tekton-en-aws">Tekton en AWS</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por valegui
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023, valegui.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><div>
+    <img src="_static/DO_Logo_firma.png" alt="Data Observatory"
+        style='height: 100%; object-fit: contain'>
+</div></div>
+      
+    </div>
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+<map id="inheritance9f8456faf1" name="inheritance9f8456faf1">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="5,5,77,31"/>
+<area shape="rect" id="node3" href="../hot_beverage/index.html#drinks.hot_beverage.HotBeverage" target="_top" title="Abstract class to prepare hot beverages" alt="" coords="125,5,232,31"/>
+<area shape="rect" id="node2" href="#drinks.coffee.Coffee" target="_top" title="Class to prepare coffee" alt="" coords="280,5,352,31"/>
+</map>
